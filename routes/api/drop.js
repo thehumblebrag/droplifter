@@ -1,3 +1,5 @@
+var async = require('async');
+var droplifter = require('../../');
 var Drop = require('../../models/drop');
 
 module.exports.get = function (req, res) {
@@ -20,5 +22,25 @@ module.exports.find = function (req, res) {
 };
 
 module.exports.geoFind = function (req, res) {
-    res.json([]);
+    var latlng = req.params.location.split(',').map(Number).reverse();
+    var radius = droplifter.get('proximity_radius');
+    var point = {
+        type: 'Point',
+        coordinates: latlng
+    };
+    var options = {
+        spherical: true,
+        maxDistance: radius / 6378137,
+        distanceMultiplier: 6378137
+    };
+    Drop.geoNear(point, options, function (err, results) {
+        async.map(results, function (result, done) {
+            result.obj.populate('user', function (err, drop) {
+                console.log('drop', drop);
+                done(null, drop);
+            });
+        }, function (err, drops) {
+            res.json(drops);
+        });
+    });
 };

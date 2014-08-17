@@ -19,10 +19,12 @@ var session = require('express-session');
 var Droplifter = function (config) {
     this._config = _.extend({
         port: 3000,
-        database: 'mongodb://localhost/droplifter'
+        database_url: 'mongodb://localhost/droplifter',
+        proximity_radius: 500
     }, config);
     console.log('.');
     this.express = express();
+    this.database = require('./lib/database')(this.get('database_url'));
 };
 
 Droplifter.prototype.get = function (prop) {
@@ -50,10 +52,16 @@ Droplifter.prototype.drop = function () {
     this.express.use(passport.initialize());
     this.express.use(passport.session());
     this.routes = require('./routes');
-    this.database = require('./lib/database');
     this.express.listen(process.env.PORT || this._config.port, function () {
         console.log('Wait for the drop.');
     });
+};
+
+Droplifter.prototype.model = function (name, schema) {
+    if (!name) {
+        throw Error('No name provided');
+    }
+    return this.database.model(name, schema);
 };
 
 var droplifter = module.exports = exports = new Droplifter(config);

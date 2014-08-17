@@ -1,3 +1,5 @@
+var async = require('async');
+var droplifter = require('../../');
 var User = require('../../models/user');
 
 module.exports.get = function (req, res) {
@@ -20,5 +22,22 @@ module.exports.find = function (req, res) {
 };
 
 module.exports.geoFind = function (req, res) {
-    res.json([]);
+    var latlng = req.params.location.split(',').map(Number).reverse();
+    var radius = droplifter.get('proximity_radius');
+    var point = {
+        type: 'Point',
+        coordinates: latlng
+    };
+    var options = {
+        spherical: true,
+        maxDistance: radius / 6378137,
+        distanceMultiplier: 6378137
+    };
+    User.geoNear(point, options, function (err, results) {
+        async.map(results, function (result, done) {
+            done(null, result.obj);
+        }, function (err, drops) {
+            res.json(drops);
+        });
+    });
 };

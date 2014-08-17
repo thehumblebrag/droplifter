@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A proximity based chat application.",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "contributors": [
     {
       "name": "Jack Armley"

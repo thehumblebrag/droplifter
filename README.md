@@ -1,3 +1,5 @@
+![Droplifter](artwork/droplifter-logo.png)
+
 # Droplifter
 
 Droplifter is a proximity based chat application.
@@ -53,3 +55,35 @@ Each drop gains points when users likes it which will be used to determine it's 
 ### Maurice makes friends
 
 > Maurice is sitting at home on his couch. It's Saturday night, and he needs to make plans, stat. He pulls out his smartphone: no missed calls, no messages, no tinder matches. On a whim, he fires up Droplifter... and settles back into his couch, chatting with a number of nearby players. He chats up a frisky young lady (who is, in fact, his dad on the ipad upstairs). In an effort to track her down in real life, he sets out to the nearest burger joint to see if she’s there. Inevitably, she disappears off his chat list as he moves, but others appear and take her place on his list. He sits at Hungry Spot on chat for the rest of the night, talking to many more men he thinks are women.
+
+## Getting Started
+
+### Requirements
+
+- nodejs with npm (`brew install nodejs`)
+- mongodb (`brew install mongodb`)
+
+### Running your server
+
+1. Clone the repo to your machine with `git clone git@github.com:thehumblebrag/droplifter.git`
+2. Install dependencies with `npm install` (in your `/path/to/repo`)
+3. _Optional:_ Update the `config.js` file with your own settings.
+4. _Optional:_ Initialize your server using test data with `node bin/init`.
+4. Launch your server with `npm start`
+
+### Configuration
+
+Your server can be configured by changing the `config.js` file within your repo. Droplifter supports the following settings:
+
+- `port`: Port to use for your server to listen on (default `3000`)
+- `database_url`: Location for your mongo instance (default `mongodb://localhost/droplifter`)
+- `proximity_radius`: The radius (in meters) that a user must be within to find a Drop (default `500`)
+
+## Lexicon
+
+- **bump**: Equivalent of a *like* or *heart*; a bump can extend the life of a drop.
+- **comment**: Note left in response to a drop, attached to the drop.
+- **connect**: Use of a social network service to join Droplifter.
+- **convo**: (ie. conversation) View of drop and associated comments.
+- **drop**: A new message, bound to a location. Drops have a natural lifespan, which can be extended with a bump.
+- **stream**: View of drops within proximity radius.
