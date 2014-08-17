@@ -11,7 +11,10 @@ var schema = new mongoose.Schema({
         type: [Number],
         index: '2dsphere'
     },
-    score: Number,
+    score: {
+        type: Number,
+        select: false
+    },
     created_at: Date
 });
 

@@ -9,7 +9,9 @@ var USERS = {
         email: 'amelia@example.com',
         gender: 'female',
         location: 'Perth, Western Australia',
-        created_at: new Date()
+        created_at: new Date(),
+        last_access_at: new Date(),
+        last_access_location: [138.960597, 34.476826]
     }),
     dave: new User({
         name: 'Dave',
@@ -34,6 +36,8 @@ var USERS = {
         name: 'Ronda',
         email: 'ronda@example.com',
         gender: 'female',
+        last_access_at: new Date(),
+        last_access_location: [115.849436, -31.946555],
         created_at: new Date()
     })
 };
