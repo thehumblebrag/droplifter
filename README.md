@@ -58,7 +58,7 @@ Each drop gains points when users likes it which will be used to determine it's 
 
 ### Requirements
 
-- nodejs with `npm` (`brew install nodejs`)
+- nodejs with npm (`brew install nodejs`)
 - mongodb (`brew install mongodb`)
 
 ### Running your server
@@ -68,3 +68,10 @@ Each drop gains points when users likes it which will be used to determine it's 
 3. _Optional:_ Update the `config.js` file with your own settings.
 4. _Optional:_ Initialize your server using test data with `node bin/init`.
 4. Launch your server with `node bin/index`
+
+### Configuration
+
+Your server can be configured by changing the `config.js` file within your repo. Droplifter supports the following settings:
+
+- `port`: Port to use for your server to listen on (default `3000`)
+- `database_url`: Location for your mongo instance (default `mongodb://localhost/droplifter`)
