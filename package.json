@@ -7,7 +7,8 @@
     { "name": "Jack Armley" },
     { "name": "Jimmy Hillis" },
     { "name": "Niaal Holder" },
-    { "name": "Sandy Lim" }
+    { "name": "Sandy Lim" },
+    { "name": "Simon Manning" }
   ],
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
     "express": "~4.8.2",
     "jade": "~1.5.0",
     "mongoose": "~3.8.14",
-    "minimist": "~0.2.0"
+    "minimist": "~0.2.0",
+    "underscore": "~1.6.0"
   }
 }
