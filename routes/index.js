@@ -12,4 +12,3 @@ droplifter.express.get('/drop/location/:location', drop.geoFind);
 // User routes
 droplifter.express.get('/user', user.get);
 droplifter.express.get('/user/:id', user.find);
-droplifter.express.get('/user/location/:location', user.geoFind);

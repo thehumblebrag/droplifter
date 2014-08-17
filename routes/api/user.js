@@ -18,7 +18,3 @@ module.exports.find = function (req, res) {
         res.json(user);
     });
 };
-
-module.exports.geoFind = function (req, res) {
-    res.json([]);
-};
