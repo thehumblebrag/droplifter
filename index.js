@@ -13,6 +13,8 @@ var path = require('path');
 var argv = require('minimist')(process.argv.slice(2));
 var config = require(path.join(__dirname, argv.config || 'config'));
 var express = require('express');
+var passport = require('passport');
+var session = require('express-session');
 
 var Droplifter = function (config) {
     this._config = _.extend({
@@ -40,6 +42,13 @@ Droplifter.prototype.set = function (prop, value) {
 };
 
 Droplifter.prototype.drop = function () {
+    this.express.use(session({
+        secret: 'whateverbro',
+        saveUninitialized: true,
+        resave: true
+    }));
+    this.express.use(passport.initialize());
+    this.express.use(passport.session());
     this.routes = require('./routes');
     this.database = require('./lib/database');
     this.express.listen(process.env.PORT || this._config.port, function () {
