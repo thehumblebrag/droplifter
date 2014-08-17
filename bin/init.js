@@ -150,10 +150,14 @@ var insertDrop = function (drop, callback) {
     return Drop.create(drop, callback);
 };
 
-async.map(DROPS, insertDrop, function (err, drops) {
-    if (err) {
-        console.error(err);
-    }
-    console.log('Import complete. %d drops added', drops.length);
-    process.exit();
+async.each(Object.keys(USERS), function (user, done) {
+    USERS[user].save(done);
+}, function (err) {
+    async.map(DROPS, insertDrop, function (err, drops) {
+        if (err) {
+            console.error(err);
+        }
+        console.log('Import complete. %d drops added', drops.length);
+        process.exit();
+    });
 });
