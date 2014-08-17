@@ -77,3 +77,12 @@ Your server can be configured by changing the `config.js` file within your repo.
 
 - `port`: Port to use for your server to listen on (default `3000`)
 - `database_url`: Location for your mongo instance (default `mongodb://localhost/droplifter`)
+
+## Lexicon
+
+- **bump**: Equivalent of a *like* or *heart*; a bump can extend the life of a drop.
+- **comment**: Note left in response to a drop, attached to the drop.
+- **connect**: Use of a social network service to join Droplifter.
+- **convo**: (ie. conversation) View of drop and associated comments.
+- **drop**: A new message, bound to a location. Drops have a natural lifespan, which can be extended with a bump.
+- **stream**: View of drops within proximity radius.
