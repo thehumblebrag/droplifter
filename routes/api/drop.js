@@ -1,7 +1,6 @@
 var async = require('async');
+var droplifter = require('../../');
 var Drop = require('../../models/drop');
-
-SEARCH_RADIUS = 400;
 
 module.exports.get = function (req, res) {
     Drop.find().limit(10).exec(function (err, drops) {
@@ -24,7 +23,7 @@ module.exports.find = function (req, res) {
 
 module.exports.geoFind = function (req, res) {
     var latlng = req.params.location.split(',').map(Number).reverse();
-    var radius = SEARCH_RADIUS;
+    var radius = droplifter.get('proximity_radius');
     var point = {
         type: 'Point',
         coordinates: latlng

@@ -75,3 +75,4 @@ Your server can be configured by changing the `config.js` file within your repo.
 
 - `port`: Port to use for your server to listen on (default `3000`)
 - `database_url`: Location for your mongo instance (default `mongodb://localhost/droplifter`)
+- `proximity_radius`: The radius (in meters) that a user must be within to find a Drop (default `500`)

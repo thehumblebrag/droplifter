@@ -17,7 +17,8 @@ var express = require('express');
 var Droplifter = function (config) {
     this._config = _.extend({
         port: 3000,
-        database_url: 'mongodb://localhost/droplifter'
+        database_url: 'mongodb://localhost/droplifter',
+        proximity_radius: 500
     }, config);
     console.log('.');
     this.express = express();
