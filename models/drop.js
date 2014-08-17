@@ -1,6 +1,11 @@
-var mongoose = require('../lib/database');
+var droplifter = require('../');
+var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    user: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User'
+    },
     text: String,
     location: {
         type: [Number],
@@ -10,6 +15,4 @@ var schema = new mongoose.Schema({
     created_at: Date
 });
 
-var Drop = mongoose.model('Drop', schema);
-
-module.exports = Drop;
+var Drop = module.exports = exports = droplifter.model('Drop', schema);

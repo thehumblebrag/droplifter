@@ -1,7 +1,5 @@
-var mongoose = require('../lib/database');
-
-var TYPES = ['facebook', 'twitter', 'google+'];
-var GENDERS = ['male', 'female'];
+var droplifter = require('../');
+var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     name: String,
@@ -13,9 +11,10 @@ var schema = new mongoose.Schema({
     external_type: String, // facebook|twitter|google+
     external_id: String, // external id for facebook, twitter, etc.
     created_at: Date,
-    created_access_at: Date
+    last_access_at: Date
 });
 
-var User = mongoose.model('User', schema);
+var User = module.exports = exports = droplifter.model('User', schema);
 
-module.exports = User;
+User.TYPES = ['facebook', 'twitter', 'google+'];
+User.GENDERS = ['male', 'female'];
