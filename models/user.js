@@ -38,6 +38,10 @@ var schema = new mongoose.Schema({
         type: String,
         select: false
     },
+    last_access_location: {
+        type: [Number],
+        index: '2dsphere'
+    }
 });
 
 var User = module.exports = exports = droplifter.model('User', schema);
