@@ -1,3 +1,5 @@
+![Droplifter](artwork/droplifter-logo.png)
+
 # Droplifter
 
 Droplifter is a proximity based chat application.
