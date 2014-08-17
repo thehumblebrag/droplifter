@@ -63,11 +63,11 @@ Each drop gains points when users likes it which will be used to determine it's 
 
 ### Running your server
 
-1. Clone the repo to your machine `git clone git@github.com:thehumblebrag/droplifter.git` into your working path
+1. Clone the repo to your machine with `git clone git@github.com:thehumblebrag/droplifter.git`
 2. Install dependencies with `npm install` (in your `/path/to/repo`)
 3. _Optional:_ Update the `config.js` file with your own settings.
 4. _Optional:_ Initialize your server using test data with `node bin/init`.
-4. Launch your server with `node bin/index`
+4. Launch your server with `npm start`
 
 ### Configuration
 
