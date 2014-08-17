@@ -1,4 +1,4 @@
 module.exports = {
     port: 3000,
-    database: 'mongodb://localhost/droplifter'
+    database_url: 'mongodb://localhost/droplifter'
 };
