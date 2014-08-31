@@ -39,8 +39,6 @@ droplifter.express.get(
 // Drop routes
 droplifter.express.get('/drop', authmw.getUser, drop.get);
 droplifter.express.get('/drop/:id', authmw.getUser, drop.find);
-droplifter.express.get('/drop/location/:location',
-                       authmw.getUser, drop.geoFind);
 
 // User routes
 droplifter.express.get('/user', authmw.getUser, user.get);
