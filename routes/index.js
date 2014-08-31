@@ -1,9 +1,10 @@
 var passport = require('passport');
 var droplifter = require('../');
+var authmw = require('./middleware/auth');
 var drop = require('./api/drop');
 var user = require('./api/user');
 var auth = require('./auth');
-var authmw = require('./middleware/auth');
+var admin = require('./admin');
 
 // Auth routes
 // Facebook: The post request to this route should include a JSON object
@@ -45,3 +46,6 @@ droplifter.express.get('/user', authmw.getUser, user.get);
 droplifter.express.get('/user/:id', authmw.getUser, user.find);
 droplifter.express.get('/user/location/:location',
                        authmw.getUser, user.geoFind);
+
+// Admin routes
+droplifter.express.get('/admin/chat', admin.chat);

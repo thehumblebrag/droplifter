@@ -1,0 +1,73 @@
+extends base
+
+block head
+  link(href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700" rel="stylesheet" type="text/css")
+  style(type="text/css").
+    body,
+    input {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size:16px;
+      font-weight:300;
+      line-height:1.4em;
+    }
+    #map {
+      position:fixed;
+      top:0;
+      right:0;
+      width:70%;
+      height:100%;
+    }
+    #chat {
+      box-sizing:border-box;
+      position:fixed;
+      top:0;
+      left:0;
+      width:30%;
+      height:100%;
+      padding:20px;
+      padding-bottom:44px;
+      overflow:auto;
+    }
+      h1 {
+        margin:0 0 1em 0;
+      }
+      .drops {
+        list-style:none;
+        margin:0;
+        padding:0;
+      }
+        .drop {
+          margin-bottom:1em;
+          padding-bottom:1em;
+          border-bottom:solid 1px #243358;
+        }
+        .drop-user {
+          font-weight:700;
+          color:#243358;
+        }
+      #chat-add {
+        box-sizing:border-box;
+        position:fixed;
+        bottom:0;
+        left:0;
+        width:30%;
+        height:44px;
+        z-index:2;
+        background:#243358;
+        border:0;
+        color:white;
+        font-size:20px;
+        padding:0 10px;
+        line-height:44px;
+      }
+
+block content
+  #chat(ng-controller="DropCtrl")
+    ul.drops
+      li.drop(ng-repeat="drop in drops()")
+        .drop-text {{ drop.text }}
+        .drop-user {{ drop.user.name }}
+    form(name="drop-form", ng-submit="submitDrop()")
+      input#chat-add(type="text", ng-model="user_drop", placeholder="Need to drop the kids off at the pool...")
+  #map(ng-controller="MapCtrl")
+    h1 Map panel
