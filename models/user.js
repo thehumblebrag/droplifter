@@ -1,5 +1,6 @@
 var droplifter = require('../');
 var mongoose = require('mongoose');
+var uuid = require('node-uuid');
 
 AUTH_TYPES = ['facebook', 'twitter', 'google+'];
 GENDERS = ['male', 'female'];
@@ -7,6 +8,12 @@ GENDERS = ['male', 'female'];
 var schema = new mongoose.Schema({
     name: String,
     avatar: String, // avatar
+    token: {
+        type: String,
+        default: function() {
+            return uuid.v4().replace(/-/g, '');
+        }
+    },
     phone: {
         type: String,
         select: false
