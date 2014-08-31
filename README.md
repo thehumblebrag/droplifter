@@ -40,7 +40,22 @@ Users can anonymize themselves completely which means that when you see their dr
 - lat long
 - points
 
-Each drop gains points when users likes it which will be used to determine it's longevity for people.
+#### Longevity of Drops
+
+Longevity of a drop is influenced by the following factors:
+
+- **Active** influence from users
+- **Passive** influence from location factors
+
+##### Active Influence: Likes & Reports
+
+Users can *like* or *report* a drop, thereby increasing or decreasing its lifespan. *Likes* indicate users find a drop useful, interesting, or entertaining, and should stick around longer. *Reports* indicate users find a drop unhelpful, inappropriate, or harmful, and should disappear as soon as possible.
+
+##### Passive Influence: Population & Frequency
+
+A drop's initial lifespan is affected by drop population at a location, and drop frequency in a region. *Population* refers to the number of other active drops at a location. *Frequency* refers to the rate at which drops appear within a region, current to the time a new drop is to be created.
+
+Both population and frequency have an inverse effect on lifespan.
 
 ## Stories
 
