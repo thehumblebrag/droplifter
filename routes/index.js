@@ -3,6 +3,7 @@ var droplifter = require('../');
 var drop = require('./api/drop');
 var user = require('./api/user');
 var auth = require('./auth');
+var authmw = require('./middleware/auth');
 
 // Auth routes
 // Facebook: The post request to this route should include a JSON object
@@ -36,11 +37,13 @@ droplifter.express.get(
     });
 
 // Drop routes
-droplifter.express.get('/drop', drop.get);
-droplifter.express.get('/drop/:id', drop.find);
-droplifter.express.get('/drop/location/:location', drop.geoFind);
+droplifter.express.get('/drop', authmw.getUser, drop.get);
+droplifter.express.get('/drop/:id', authmw.getUser, drop.find);
+droplifter.express.get('/drop/location/:location',
+                       authmw.getUser, drop.geoFind);
 
 // User routes
-droplifter.express.get('/user', user.get);
-droplifter.express.get('/user/:id', user.find);
-droplifter.express.get('/user/location/:location', user.geoFind);
+droplifter.express.get('/user', authmw.getUser, user.get);
+droplifter.express.get('/user/:id', authmw.getUser, user.find);
+droplifter.express.get('/user/location/:location',
+                       authmw.getUser, user.geoFind);
