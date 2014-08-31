@@ -22,7 +22,7 @@ droplifter.express.get(
     });
 
 // Twitter
-droplifter.express.post(
+droplifter.express.get(
     '/auth/twitter/token',
     passport.authenticate('twitter-token'),
     function (req, res) {

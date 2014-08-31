@@ -36,7 +36,7 @@
     "mongoose": "~3.8.14",
     "passport": "^0.2.0",
     "passport-facebook-token": "^0.3.1",
-    "passport-twitter-token": "^0.1.4",
+    "passport-twitter-token": "git://github.com/thehumblebrag/passport-twitter-token.git#2ba40bd457",
     "underscore": "~1.6.0"
   }
 }
