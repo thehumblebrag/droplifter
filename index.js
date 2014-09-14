@@ -13,6 +13,9 @@ var path = require('path');
 var argv = require('minimist')(process.argv.slice(2));
 var config = require(path.join(__dirname, argv.config || 'config'));
 var express = require('express');
+var passport = require('passport');
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 var Droplifter = function (config) {
     this._config = _.extend({
@@ -20,7 +23,6 @@ var Droplifter = function (config) {
         database_url: 'mongodb://localhost/droplifter',
         proximity_radius: 500
     }, config);
-    console.log('.');
     this.express = express();
     this.database = require('./lib/database')(this.get('database_url'));
 };
@@ -42,6 +44,18 @@ Droplifter.prototype.set = function (prop, value) {
 };
 
 Droplifter.prototype.drop = function () {
+    this.express.use(session({
+        secret: 'whateverbro',
+        saveUninitialized: true,
+        resave: true
+    }));
+    this.express.use(passport.initialize());
+    this.express.use(passport.session());
+    this.express.use(bodyParser.urlencoded({ extended: true }));
+    this.express.use(bodyParser.json());
+    this.express.set('views', 'templates');
+    this.express.set('view engine', 'jade');
+    this.express.use(express.static(__dirname + '/public'));
     this.routes = require('./routes');
     this.express.listen(process.env.PORT || this._config.port, function () {
         console.log('Wait for the drop.');
