@@ -16,10 +16,10 @@ droplifter.express.get(
     function (req, res) {
         // Do something with User.
         if (req.user) {
-            res.json({success: true, user: req.user});
+            res.json({ success: true, user: req.user });
         }
         else {
-            res.json({success: false});
+            res.json({ success: false });
         }
     });
 
@@ -28,25 +28,34 @@ droplifter.express.get(
     '/auth/twitter/token',
     passport.authenticate('twitter-token'),
     function (req, res) {
-        // do something with req.user
         if (req.user) {
-            res.json({success: true, user: req.user});
+            res.json({ success: true, user: req.user });
         }
         else {
-            res.json({success: false});
+            res.json({ success: false });
         }
     });
 
+droplifter.express.get('/auth/twitter', passport.authenticate('twitter'));
+droplifter.express.get('/auth/twitter/callback',
+    passport.authenticate('twitter', {
+        successRedirect: '/admin/chat',
+        failureRedirect: '/login'
+    })
+);
+
 // Drop routes
-droplifter.express.get('/drop', authmw.getUser, drop.get);
-droplifter.express.get('/drop/:id', authmw.getUser, drop.find);
-droplifter.express.post('/drop', authmw.getUser, drop.create);
+droplifter.express.get('/drop', authmw.getToken, drop.get);
+droplifter.express.get('/drop/:id', authmw.getToken, drop.find);
+droplifter.express.post('/drop', authmw.getToken, drop.create);
 
 // User routes
-droplifter.express.get('/user', authmw.getUser, user.get);
-droplifter.express.get('/user/:id', authmw.getUser, user.find);
+droplifter.express.get('/user', authmw.getToken, user.get);
+droplifter.express.get('/user/me', authmw.requireUser, user.me);
+droplifter.express.get('/user/:id', authmw.getToken, user.find);
 droplifter.express.get('/user/location/:location',
-                       authmw.getUser, user.geoFind);
+                       authmw.getToken, user.geoFind);
 
 // Admin routes
-droplifter.express.get('/admin/chat', admin.chat);
+droplifter.express.get('/admin/chat', authmw.requireUser, authmw.requireAdmin, admin.chat);
+droplifter.express.get('/admin/login', admin.login);

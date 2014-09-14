@@ -1,11 +1,28 @@
 var User = require('../../models/user');
 
-module.exports.getUser = function (req, res, next) {
+module.exports.requireUser = function (req, res, next) {
+    if (!req.user) {
+        return res.redirect('/auth/twitter');
+    }
+    next();
+};
+
+module.exports.requireAdmin = function (req, res, next) {
+    if (!req.user) {
+        return res.redirect('/auth/twitter');
+    }
+    if (req.user.admin) {
+        return next();
+    }
+    res.send(401);
+};
+
+module.exports.getToken = function (req, res, next) {
     // Look for an auth token in the request.
-    var authToken = req.param('token');
-    if (authToken) {
+    var auth_token = req.param('token');
+    if (auth_token) {
         User.findOne({
-            token: authToken
+            token: auth_token
         }, function (err, user) {
             if (user) {
                 req.user = user;
@@ -14,6 +31,6 @@ module.exports.getUser = function (req, res, next) {
         });
     }
     else {
-        next();
+        res.send(401);
     }
 };

@@ -11,6 +11,10 @@ module.exports.get = function (req, res) {
     });
 };
 
+module.exports.me = function (req, res) {
+    return res.json([req.user]);
+};
+
 module.exports.find = function (req, res) {
     var id = req.param.id;
     User.findById(id, function (err, user) {

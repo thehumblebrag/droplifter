@@ -19,6 +19,7 @@ var bodyParser = require('body-parser');
 
 var Droplifter = function (config) {
     this._config = _.extend({
+        url: 'http://localhost:3000',
         port: 3000,
         database_url: 'mongodb://localhost/droplifter',
         proximity_radius: 500
