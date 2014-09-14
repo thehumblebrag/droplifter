@@ -1,6 +1,7 @@
 var passport = require('passport');
 var droplifter = require('../');
 var authmw = require('./middleware/auth');
+var landing = require('./landing');
 var drop = require('./api/drop');
 var user = require('./api/user');
 var auth = require('./auth');
@@ -36,6 +37,9 @@ droplifter.express.get(
             res.json({success: false});
         }
     });
+
+// Landing page routes
+droplifter.express.get('/', landing.index);
 
 // Drop routes
 droplifter.express.get('/drop', authmw.getUser, drop.get);
