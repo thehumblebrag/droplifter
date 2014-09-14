@@ -1,0 +1,25 @@
+doctype
+<!--[if IE 7]>
+html(lang="en", ng-app="droplifter").lt-ie10.lt-ie9.lt-ie8.lt-ie7
+<![endif]-->
+<!--[if IE 8]>
+html(lang="en", ng-app="droplifter").lt-ie10.lt-ie9
+<![endif]-->
+<!--[if IE 9]>
+html(lang="en", ng-app="droplifter").lt-ie10
+<![endif]-->
+html(lang="en", ng-app="droplifter")
+  head
+    title Droplifter
+    link(rel="stylesheet", href="/stylesheets/styles.css")
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width,user-scalable=no, scale=1, maximum-scale=1.0")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    link(href="https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css", rel="stylesheet")
+    block head
+  body
+    block content
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.js")
+    script(src="/scripts/app.js")
+    script(src="https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js")
