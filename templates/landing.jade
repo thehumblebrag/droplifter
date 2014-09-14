@@ -1,4 +1,10 @@
 extends base
 
 block content
-    p Hello world.
+    .promo
+        svg.promo-logo(viewBox="0 0 222 88")
+            use(xlink:href="images/logo.svg#logo")
+        p.promo-sell
+            strong Droplifter is a proximity based chat application.
+            |  Messages have a score which determines their longevity. Users are promoted based on their messages' score.
+        a.promo-cta(href="") Download Droplifter

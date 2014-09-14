@@ -1,0 +1,74 @@
+/**
+ * Layout
+ */
+
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+
+html{
+    height: 100%;
+    background:
+        url('../images/logo-pattern.svg') 0 0/60px 60px repeat,
+        radial-gradient(circle,$blue 60%,darken($blue,5%)) $blue;
+}
+body{
+    display: flex;
+    box-sizing: border-box;
+    width: auto;
+    height: 100%;
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    color: $yellow;
+    font: normal normal 100%/1.5em 'pt sans',sans-serif;
+}
+.promo{
+    margin: auto;
+    text-align: center;
+    &-logo{
+        display: block;
+        width: 200px;
+        max-width: 400px;
+        margin:0 auto 20px;
+    }
+    &-sell{
+        margin: 0;
+        padding: 1em 0 2em;
+        font-size: 1.2em;
+        line-height: 1.5em;
+        text-shadow: 0 1px 1px fade-out(black,.5);
+        strong{
+            color: lighten($yellow,10%);
+            font-weight: normal;
+        }
+    }
+    &-cta{
+        display: inline-block;
+        padding: 1em 2em;
+        border-radius: 5px;
+        background-color: $yellow;
+        color: $blue;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: .25s ease;
+        &:hover{
+            background-color: $orange;
+            color: white;
+        }
+    }
+    @media screen and(min-width:500px){
+        &-logo{
+            width: 100%;
+        }
+        &-sell{
+            font-size: 1.5em;
+            strong{
+                display: block;
+                clear: both;
+            }
+        }
+        &-cta{
+            font-size: 1.3em;
+        }
+    }
+}
