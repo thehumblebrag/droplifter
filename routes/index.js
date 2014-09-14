@@ -40,6 +40,7 @@ droplifter.express.get(
 // Drop routes
 droplifter.express.get('/drop', authmw.getUser, drop.get);
 droplifter.express.get('/drop/:id', authmw.getUser, drop.find);
+droplifter.express.post('/drop', authmw.getUser, drop.create);
 
 // User routes
 droplifter.express.get('/user', authmw.getUser, user.get);

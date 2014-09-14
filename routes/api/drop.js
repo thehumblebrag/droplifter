@@ -15,7 +15,6 @@ module.exports.get = function (req, res) {
 };
 
 module.exports.create = function (req, res) {
-    console.log(req.body.location);
     var drop = new Drop({
         text: req.body.text,
         location: [req.body.location.lng, req.body.location.lat],
@@ -23,10 +22,9 @@ module.exports.create = function (req, res) {
     });
     drop.save(function (err, drop) {
         if (err) {
-        console.log('error', err);
+            console.log('error', err);
             return res.json({ success: false });
         }
-        console.log('saved!', drop.id);
         res.json({ success: true })
     });
 };

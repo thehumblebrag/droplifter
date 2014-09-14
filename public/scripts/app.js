@@ -1,4 +1,4 @@
-var droplifter = angular.module('droplifter', ['ngResource']);
+var droplifter = angular.module('droplifter', ['ngResource'])
 
 /**
  * Factory: Drop
@@ -8,15 +8,15 @@ var droplifter = angular.module('droplifter', ['ngResource']);
  * Requirements:
  * - ngResource
  */
-droplifter.factory('DropFactory', [
+.factory('DropFactory', [
 '$resource',
 function ($resource) {
-    return $resource('/api/drop/:id', {}, {
+    return $resource('/drop/:id', {}, {
         query: { method: 'GET', isArray: true },
         update: { method: 'PUT' },
         delete: { method: 'DELETE' }
     });
-}]);
+}])
 
 /**
  * Factory: User
@@ -26,7 +26,7 @@ function ($resource) {
  * Requirements:
  * - ngResource
  */
-droplifter.factory('DropFactory', [
+.factory('DropFactory', [
 '$resource',
 function ($resource) {
     return $resource('/drop/', {}, {
@@ -35,7 +35,7 @@ function ($resource) {
         save: { method: 'POST' },
         delete: { method: 'DELETE' }
     });
-}]);
+}])
 
 /**
  * Factory: LocationService
@@ -45,7 +45,7 @@ function ($resource) {
  * Requirements:
  * - ngResource
  */
-droplifter.service('LocationService', [
+.service('LocationService', [
 function () {
     var _location = null;
     var setLocation = function (lat, lng) {
@@ -64,7 +64,7 @@ function () {
         setLocation: setLocation,
         getLocation: getLocation
     };
-}]);
+}])
 
 /**
  * Controller: DropCtrl
@@ -74,11 +74,12 @@ function () {
  * Requirements:
  * - ngResource
  */
-droplifter.controller('DropCtrl', ['$scope', 'DropFactory', 'LocationService',
+.controller('DropCtrl', ['$scope', 'DropFactory', 'LocationService',
 function ($scope, DropFactory, LocationService) {
     var _drops = [];
     // Public
     $scope.user_drop = "";
+    $scope.location = LocationService.getLocation();
     /**
      * When the location changes, load new drops
      * @param {object} location Object with lat and lng
@@ -87,6 +88,7 @@ function ($scope, DropFactory, LocationService) {
         if (!location) {
             return;
         }
+        $scope.location = location;
         DropFactory.query({ location: [location.lat, location.lng].join(',') }, function (drops) {
             _drops = drops;
         });
@@ -116,7 +118,7 @@ function ($scope, DropFactory, LocationService) {
             });
         });
     };
-}]);
+}])
 
 /**
  * Controller: MapCtrl
@@ -126,7 +128,7 @@ function ($scope, DropFactory, LocationService) {
  * Requirements:
  * - ngResource
  */
-droplifter.controller('MapCtrl', ['$scope', 'LocationService',
+.controller('MapCtrl', ['$scope', 'LocationService',
 function ($scope, LocationService) {
     L.mapbox.accessToken = 'pk.eyJ1IjoiamltbXloaWxsaXMiLCJhIjoiNmZmcXBCSSJ9.41XdttwBXWuEhA_9p-WMdg';
     var map = L.mapbox.map('map', 'jimmyhillis.jcgp71mn').setView([-31.946555, 115.849436], 10);
@@ -143,4 +145,12 @@ function ($scope, LocationService) {
             LocationService.setLocation(e.latlng.lat, e.latlng.lng);
         });
     });
-}]);
+}])
+
+
+.filter('degree', function() {
+    return function (round) {
+        console.log(round);
+        return Math.round(round * 10000) / 10000;
+    };
+});

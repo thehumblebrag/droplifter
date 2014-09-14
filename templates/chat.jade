@@ -25,7 +25,7 @@ block head
       width:30%;
       height:100%;
       padding:20px;
-      padding-bottom:44px;
+      padding-bottom:88px;
       overflow:auto;
     }
       h1 {
@@ -45,6 +45,18 @@ block head
           font-weight:700;
           color:#243358;
         }
+      #current-location {
+        position:fixed;
+        left:0;
+        bottom:44px;
+        width:30%;
+        height:44px;
+        padding:0 10px;
+        background:white;
+        line-height:44px;
+        background:#c54c27;
+        color:#ffffff;
+      }
       #chat-add {
         box-sizing:border-box;
         position:fixed;
@@ -67,6 +79,7 @@ block content
       li.drop(ng-repeat="drop in drops()")
         .drop-text {{ drop.text }}
         .drop-user {{ drop.user.name }}
+    #current-location {{ location.lat | degree }}º, {{ location.lng | degree }}º
     form(name="drop-form", ng-submit="submitDrop()")
       input#chat-add(type="text", ng-model="user_drop", placeholder="Need to drop the kids off at the pool...")
   #map(ng-controller="MapCtrl")
