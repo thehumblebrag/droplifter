@@ -16,6 +16,7 @@ module.exports.get = function (req, res) {
 
 module.exports.create = function (req, res) {
     var drop = new Drop({
+        user: req.user,
         text: req.body.text,
         location: [req.body.location.lng, req.body.location.lat],
         created_at: new Date()

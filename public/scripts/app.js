@@ -8,10 +8,10 @@ var droplifter = angular.module('droplifter', ['ngResource'])
  * Requirements:
  * - ngResource
  */
-.factory('DropFactory', [
+.factory('UserFactory', [
 '$resource',
 function ($resource) {
-    return $resource('/drop/:id', {}, {
+    return $resource('/user/:id?', {}, {
         query: { method: 'GET', isArray: true },
         update: { method: 'PUT' },
         delete: { method: 'DELETE' }
@@ -49,7 +49,7 @@ function ($resource) {
 function () {
     var _location = null;
     var setLocation = function (lat, lng) {
-        if (typeof lat === "object") {
+        if (typeof lat === 'object') {
             _location = lat;
         }
         _location = {
@@ -66,6 +66,17 @@ function () {
     };
 }])
 
+.controller('DroplifterCtrl', ['$scope', 'UserFactory',
+function ($scope, UserFactory) {
+
+    $scope.user = null;
+
+    UserFactory.query({ id: 'me' }, function (users) {
+        $scope.user = users[0];
+    })
+
+}])
+
 /**
  * Controller: DropCtrl
  *
@@ -78,8 +89,9 @@ function () {
 function ($scope, DropFactory, LocationService) {
     var _drops = [];
     // Public
-    $scope.user_drop = "";
+    $scope.user_drop = null;
     $scope.location = LocationService.getLocation();
+
     /**
      * When the location changes, load new drops
      * @param {object} location Object with lat and lng
@@ -89,10 +101,29 @@ function ($scope, DropFactory, LocationService) {
             return;
         }
         $scope.location = location;
-        DropFactory.query({ location: [location.lat, location.lng].join(',') }, function (drops) {
+        findDrops();
+    });
+
+    $scope.$watch('user', function (user) {
+        if (!user) {
+            return;
+        }
+        findDrops();
+    });
+
+    var findDrops = function () {
+        if (!$scope.user || !$scope.location) {
+            console.error('Not enough details');
+            return;
+        }
+        DropFactory.query({
+            token: $scope.user.token,
+            location: [$scope.location.lat, $scope.location.lng].join(',')
+        }, function (drops) {
             _drops = drops;
         });
-    });
+    }
+
     /**
      * Return currently loaded drops
      * @return {array} User location relevant drops
@@ -105,7 +136,7 @@ function ($scope, DropFactory, LocationService) {
      */
     $scope.submitDrop = function () {
         var drop = new DropFactory({
-            // @TODO User is required here
+            token: $scope.user.token,
             text: $scope.user_drop,
             location: LocationService.getLocation(),
             created_at: new Date()
@@ -113,7 +144,8 @@ function ($scope, DropFactory, LocationService) {
         drop.$save(function () {
             // @TODO this should refresh automatically, without this
             var location = LocationService.getLocation();
-            DropFactory.query({ location: [location.lat, location.lng].join(',') }, function (drops) {
+            $scope.user_drop = null;
+            DropFactory.query({ token: $scope.user.token, location: [location.lat, location.lng].join(',') }, function (drops) {
                 _drops = drops;
             });
         });
@@ -150,7 +182,6 @@ function ($scope, LocationService) {
 
 .filter('degree', function() {
     return function (round) {
-        console.log(round);
         return Math.round(round * 10000) / 10000;
     };
 });

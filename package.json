@@ -39,6 +39,7 @@
     "passport": "^0.2.0",
     "passport-facebook-token": "^0.3.1",
     "passport-twitter-token": "git://github.com/thehumblebrag/passport-twitter-token.git#2ba40bd457",
-    "underscore": "~1.6.0"
+    "underscore": "~1.6.0",
+    "passport-twitter": "~1.0.2"
   }
 }
