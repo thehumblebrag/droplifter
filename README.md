@@ -28,7 +28,6 @@ Sign up with Twitter, Facebook or Google+
 - username
 - avatar
 - email/phone number (optional, private)
-- gender (optional, private)
 - location (city, optional, private)
 
 Users can anonymize themselves completely which means that when you see their drops you are provide a completely fake persona with a gender neutral name such as `Jamie Jones`.

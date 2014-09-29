@@ -7,7 +7,6 @@ var USERS = {
     amelia: new User({
         name: 'Amelia',
         email: 'amelia@example.com',
-        gender: 'female',
         location: 'Perth, Western Australia',
         created_at: new Date(),
         last_access_at: new Date(),
@@ -17,25 +16,21 @@ var USERS = {
         name: 'Dave',
         email: 'dave@example.com',
         phone: '0401333444',
-        gender: 'male',
         created_at: new Date()
     }),
     joonda: new User({
         name: 'Joonda',
         email: 'joonda@example.com',
-        gender: 'female',
         created_at: new Date()
     }),
     maurice: new User({
         name: 'Maurice',
         email: 'maurice@example.com',
-        gender: 'male',
         created_at: new Date()
     }),
     ronda: new User({
         name: 'Ronda',
         email: 'ronda@example.com',
-        gender: 'female',
         last_access_at: new Date(),
         last_access_location: [115.849436, -31.946555],
         created_at: new Date()

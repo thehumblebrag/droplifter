@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var uuid = require('node-uuid');
 
 AUTH_TYPES = ['facebook', 'twitter', 'google+'];
-GENDERS = ['male', 'female'];
 
 var schema = new mongoose.Schema({
     name: String,
