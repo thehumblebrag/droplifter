@@ -164,11 +164,15 @@ function ($scope, DropFactory, LocationService) {
 function ($scope, LocationService) {
     L.mapbox.accessToken = 'pk.eyJ1IjoiamltbXloaWxsaXMiLCJhIjoiNmZmcXBCSSJ9.41XdttwBXWuEhA_9p-WMdg';
     var map = L.mapbox.map('map', 'jimmyhillis.jcgp71mn').setView([-31.946555, 115.849436], 10);
+    var current_location_marker = L.marker([-31.946555, 115.849436], { zIndexOffset: 2 })
+            .setIcon(L.mapbox.marker.icon({ 'marker-color': '#ED932E', 'marker-size': 'large' }))
+            .addTo(map);
     // Move on change
     LocationService.setLocation(-31.946555, 115.849436);
     $scope.$watch(LocationService.getLocation, function (location) {
         if (location) {
             map.panTo(location);
+            current_location_marker.setLatLng([location.lat, location.lng]);
         }
     });
     // Update location on click
@@ -177,9 +181,23 @@ function ($scope, LocationService) {
             LocationService.setLocation(e.latlng.lat, e.latlng.lng);
         });
     });
+    // Show drops on the map
+    $scope.$watch('drops()', function (drops) {
+        drops.forEach(function (drop) {
+            if (drop.location) {
+                L.marker([drop.location[1], drop.location[0]], { zIndexOffset: 1 })
+                    .setIcon(L.mapbox.marker.icon({ 'marker-color': '#751E45' }))
+                    .addTo(map);
+            }
+        });
+    });
 }])
 
-
+/**
+ * Filter: Degree
+ *
+ * Consistent presentation of Lat/Lng degree values
+ */
 .filter('degree', function() {
     return function (round) {
         return Math.round(round * 10000) / 10000;
