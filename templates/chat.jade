@@ -74,13 +74,14 @@ block head
       }
 
 block content
-  #chat(ng-controller="DropCtrl")
-    ul.drops
-      li.drop(ng-repeat="drop in drops()")
-        .drop-text {{ drop.text }}
-        .drop-user {{ drop.user.name }}
-    #current-location {{ location.lat | degree }}º, {{ location.lng | degree }}º
-    form(name="drop-form", ng-submit="submitDrop()")
-      input#chat-add(type="text", ng-model="user_drop", placeholder="Need to drop the kids off at the pool...")
-  #map(ng-controller="MapCtrl")
-    h1 Map panel
+  #controller(ng-controller="DropCtrl")
+    #chat
+      ul.drops
+        li.drop(ng-repeat="drop in drops()")
+          .drop-text {{ drop.text }}
+          .drop-user {{ drop.user.name }}
+      #current-location {{ location.lat | degree }}º, {{ location.lng | degree }}º
+      form(name="drop-form", ng-submit="submitDrop()")
+        input#chat-add(type="text", ng-model="user_drop", placeholder="Need to drop the kids off at the pool...")
+    #map(ng-controller="MapCtrl")
+      h1 Map panel
