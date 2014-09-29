@@ -1,6 +1,28 @@
 var async = require('async');
 var droplifter = require('../../');
 var Drop = require('../../models/drop');
+var priority = require('../../lib/priority'); // terrible
+
+module.exports.test = function (req, res) {
+    // TODO: check this script is usable
+    // var myres = {
+    //     "value": "hi"
+    // }
+    // res.json(myres);
+
+    // TODO: get a bunch of drops, formatted nicely for testing
+    Drop.find().exec(function (err, drops) {
+        res.json(drops);
+    });
+
+// TODO: make sure the priority lib can be used
+    
+// TODO: make it say hello
+
+// TODO: add priority score to each drop using priority lib
+
+// TODO: check priority decay over time
+}
 
 module.exports.get = function (req, res) {
     if (req.query.location) {

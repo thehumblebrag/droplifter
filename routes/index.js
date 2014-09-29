@@ -46,6 +46,7 @@ droplifter.express.get('/auth/twitter/callback',
 
 // Drop routes
 droplifter.express.get('/drop', authmw.getToken, drop.get);
+droplifter.express.get('/test', authmw.getToken, drop.test);
 droplifter.express.get('/drop/:id', authmw.getToken, drop.find);
 droplifter.express.post('/drop', authmw.getToken, drop.create);
 
